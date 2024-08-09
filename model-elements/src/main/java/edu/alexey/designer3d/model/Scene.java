@@ -14,10 +14,6 @@ public class Scene {
 	private List<Flash> flashes;
 	private List<Camera> cameras;
 
-	public int getId() {
-		return id;
-	}
-
 	public Scene(List<PolygonalModel> models, List<Camera> cameras, List<Flash> flashes) {
 
 		if (models == null || models.isEmpty()) {
@@ -37,11 +33,16 @@ public class Scene {
 		this.id = nextId.getAndIncrement();
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public void addModel(PolygonalModel model) {
 		models.add(Objects.requireNonNull(model));
 	}
 
 	public void removeModel(PolygonalModel model) {
+		Objects.requireNonNull(model);
 		if (models.size() == 1 && models.contains(model)) {
 			throw new IllegalStateException("Cannot remove last polygonal model");
 		}
@@ -53,6 +54,7 @@ public class Scene {
 	}
 
 	public void removeCamera(Camera camera) {
+		Objects.requireNonNull(camera);
 		if (cameras.size() == 1 && cameras.contains(camera)) {
 			throw new IllegalStateException("Cannot remove last camera");
 		}
@@ -65,6 +67,6 @@ public class Scene {
 
 	public void removeFlash(Flash flash) {
 
-		flashes.remove(flash);
+		flashes.remove(Objects.requireNonNull(flash));
 	}
 }
