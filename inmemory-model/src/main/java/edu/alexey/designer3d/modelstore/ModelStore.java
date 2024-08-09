@@ -80,9 +80,8 @@ public class ModelStore implements ModelChanger {
 	public void notifyChange(ModelChanger sender) {
 
 		for (var observer : changeObservers) {
-			observer.applyUpdateModel();
+			observer.applyUpdateModel(sender);
 		}
-
 	}
 
 	public void subscribeModelChanged(ModelChangeObserver observer) {
@@ -100,49 +99,69 @@ public class ModelStore implements ModelChanger {
 
 	public void addModel(PolygonalModel model) {
 		models.add(Objects.requireNonNull(model));
+		notifyChange(this);
 	}
 
 	public void removeModel(PolygonalModel model) {
 		Objects.requireNonNull(model);
-		if (models.size() == 1 && models.contains(model)) {
-			throw new IllegalStateException("Cannot remove last polygonal model");
+		if (models.contains(model)) {
+			if (models.size() == 1) {
+				throw new IllegalStateException("Cannot remove last polygonal model");
+			} else {
+				models.remove(model);
+				notifyChange(this);
+			}
 		}
-		models.remove(model);
 	}
 
 	public void addCamera(Camera camera) {
 		cameras.add(Objects.requireNonNull(camera));
+		notifyChange(this);
 	}
 
 	public void removeCamera(Camera camera) {
 		Objects.requireNonNull(camera);
-		if (cameras.size() == 1 && cameras.contains(camera)) {
-			throw new IllegalStateException("Cannot remove last camera");
+		if (cameras.contains(camera)) {
+			if (cameras.size() == 1) {
+				throw new IllegalStateException("Cannot remove last camera");
+			} else {
+				cameras.remove(camera);
+				notifyChange(this);
+			}
 		}
-		cameras.remove(camera);
 	}
 
 	public void addFlash(Flash flash) {
 		flashes.add(Objects.requireNonNull(flash));
+		notifyChange(this);
 	}
 
 	public void removeFlash(Flash flash) {
 		Objects.requireNonNull(flash);
-		if (flashes.size() == 1 && flashes.contains(flash)) {
-			throw new IllegalStateException("Cannot remove last flash");
+		if (flashes.contains(flash)) {
+			if (flashes.size() == 1) {
+				throw new IllegalStateException("Cannot remove last flash");
+			} else {
+				flashes.remove(flash);
+				notifyChange(this);
+			}
 		}
-		flashes.remove(flash);
 	}
 
 	public void addScene(Scene scene) {
 		scenes.add(Objects.requireNonNull(scene));
+		notifyChange(this);
 	}
 
 	public void removeScene(Scene scene) {
 		Objects.requireNonNull(scene);
-		if (scenes.size() == 1 && scenes.contains(scene)) {
-			throw new IllegalStateException("Cannot remove last flash");
+		if (scenes.contains(scene)) {
+			if (scenes.size() == 1) {
+				throw new IllegalStateException("Cannot remove last flash");
+			} else {
+				scenes.remove(scene);
+				notifyChange(this);
+			}
 		}
-		scenes.remove(scene);
 	}
 }
