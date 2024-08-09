@@ -4,7 +4,7 @@
 
 *Исходная диаграмма*
 
-
+![HomeTask](https://github.com/user-attachments/assets/8a9e91a0-0191-4ff4-89b3-ecc9dcb40626)
 
 ### Решение на базе мульти-модульного Maven-проекта
 
@@ -18,4 +18,10 @@
 
 *Структура модулей*
 
+"ModelElements" (artefactId: model-elements, package: edu.alexey.designer3d.model)
 
+![Снимок экрана от 2024-08-09 19-40-10](https://github.com/user-attachments/assets/89135e08-cd1d-4bb2-8cc4-b7528277603a)
+
+"InMemoryModel" (artefactId: inmemory-model, package: edu.alexey.designer3d.modelstore)
+
+![Снимок экрана от 2024-08-09 19-39-36](https://github.com/user-attachments/assets/02917049-eebd-4b34-a660-a8abd4495698)
