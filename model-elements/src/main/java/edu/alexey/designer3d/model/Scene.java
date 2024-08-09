@@ -14,6 +14,10 @@ public class Scene {
 	private List<Flash> flashes;
 	private List<Camera> cameras;
 
+	public int getId() {
+		return id;
+	}
+
 	public Scene(List<PolygonalModel> models, List<Camera> cameras, List<Flash> flashes) {
 
 		if (models == null || models.isEmpty()) {

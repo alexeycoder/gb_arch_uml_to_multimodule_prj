@@ -8,8 +8,9 @@ import edu.alexey.designer3d.model.Flash;
 import edu.alexey.designer3d.model.PolygonalModel;
 import edu.alexey.designer3d.model.Scene;
 import edu.alexey.designer3d.modelstore.abstractions.ModelChangeObserver;
+import edu.alexey.designer3d.modelstore.abstractions.ModelChanger;
 
-public class ModelStore {
+public class ModelStore implements ModelChanger {
 
 	private List<Scene> scenes;
 
@@ -68,6 +69,19 @@ public class ModelStore {
 	private void populateScenes() {
 
 		// TODO: реализация наполнения сценами
+	}
+
+	public Scene getScene(int sceneId) {
+		return scenes.stream().filter(s -> s.getId() == sceneId).findAny().orElse(null);
+	}
+
+	@Override
+	public void notifyChange(ModelChanger sender) {
+
+		for (var observer : changeObservers) {
+			observer.applyUpdateModel();
+		}
+
 	}
 
 }
